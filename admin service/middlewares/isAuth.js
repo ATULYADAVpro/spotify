@@ -8,7 +8,7 @@ const isAuth = TryCatch(async (req, res, next) => {
     if (!token) { return next(CustomErrorHandler.UnAuthorized("Please login")) }
 
     // here checking user role and auth
-    const data = await axios.get(`${USER_URL}/api/auth/me`, {
+    const { data } = await axios.get(`${USER_URL}/api/auth/me`, {
         headers: {
             token,
         }

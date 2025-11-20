@@ -1,0 +1,11 @@
+==================
+dataurl -> 
+=================
+npm dataurl (ya data-uri / dataurl-cli) tab use hota hai jab tum kisi file ko Data URL format me convert karna chahte ho.
+✔ Simple definition:
+
+npm dataurl helps convert any file into a Data URL (base64), so you can embed the file directly in HTML/CSS/JS without storing it separately.
+
+
+---------------------------------------------
+
