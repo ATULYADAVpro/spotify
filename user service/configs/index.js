@@ -1,7 +1,7 @@
 import { config } from 'dotenv'
 config();
 
-export const { PORT, DEBUG, MONGODB_URL } = process.env;
+export const { PORT, DEBUG, MONGODB_URL, JWT_SECRECT, JWT_EXPIRY } = process.env;
 
 // ------- STATUS CODE 
 export const STATUS_OK = 200;

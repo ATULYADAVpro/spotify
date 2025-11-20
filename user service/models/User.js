@@ -1,13 +1,13 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model } from 'mongoose';
 
 const userSchema = new Schema({
-    name: { String, required: true },
-    email: { String, required: true, unique: true },
-    password: { String, required: true },
-    role: { String, required: true },
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    role: { type: String, required: true, default: "user" },
     playlist: [
-        { String, required: true }
+        { type: String, required: true }
     ],
-}, { timestamps: true })
+}, { timestamps: true });
 
-export default model('User', userSchema)
+export default model('User', userSchema);

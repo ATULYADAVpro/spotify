@@ -1,6 +1,6 @@
 import { STATUS_BAD_REQUEST, STATUS_CONFLICT, STATUS_NOTFOUND, STATUS_UNAUTHORIZED } from "../configs/index.js";
 
-class CustomErrorHandler extends error {
+class CustomErrorHandler extends Error {
     constructor(status, msg) {
         super();
         this.status = status;
