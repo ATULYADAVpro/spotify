@@ -4,9 +4,10 @@ import CustomErrorHandler from "../utils/CustomErrorHandler.js";
 import User from "../models/User.js";
 import bcrypt from 'bcrypt'
 import JwtService from "../utils/JwtService.js";
-import { STATUS_CREATED } from "../configs/index.js";
+import { STATUS_CREATED, STATUS_OK } from "../configs/index.js";
 
 const authController = {
+    // =============== register =========
     registerUser: TryCatch(async (req, res, next) => {
         //validate
         const schema = Joi.object({
@@ -41,9 +42,42 @@ const authController = {
 
     }),
 
+    // =========== Login ========
+
     loginUser: TryCatch(async (req, res, next) => {
-        res.status(200).json({ message: "Login logic goes here" });
+        //validate
+        const schema = Joi.object({
+            email: Joi.string().email().required(),
+            password: Joi.string().min(2).max(50).required(),
+        });
+        const { error, value } = schema.validate(req.body);
+        if (error) return next(error);
+        const { email, password } = value;
+
+        // Verify
+        let user = await User.findOne({ email });
+        if (!user) return next(CustomErrorHandler.NotFound("User not register"));
+
+        // comparing password
+        const isMatch = await bcrypt.compare(password, user.password)
+        if (!isMatch) { return next(CustomErrorHandler.Invalid("Invalid Creadential")) }
+
+        // creat token 
+        const token = JwtService.sign({ _id: user._id });
+
+        res.status(STATUS_OK).json({ message: "Login success", success: true, token })
+
     }),
+
+    // ====== verify profile using token
+    userProfile: TryCatch(async (req, res, next) => {
+        const user = req.user;
+        if (!user) {
+            return next(CustomErrorHandler.UnAuthorized("Please login."))
+        }
+
+        res.status(STATUS_OK).json(user)
+    })
 };
 
 export default authController;

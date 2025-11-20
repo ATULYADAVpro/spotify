@@ -8,24 +8,24 @@ class CustomErrorHandler extends Error {
         this.success = false;
     }
 
-    static AllFiledRequired(status = STATUS_BAD_REQUEST, message = 'All filed are required.') {
-        return new CustomErrorHandler(status, message)
+    static AllFiledRequired(message = 'All filed are required.') {
+        return new CustomErrorHandler(STATUS_BAD_REQUEST, message)
     }
 
-    static UnAuthorized(status = STATUS_UNAUTHORIZED, message = "Unauthorize user") {
-        return new CustomErrorHandler(status, message)
+    static UnAuthorized(message = "Unauthorize user") {
+        return new CustomErrorHandler(STATUS_UNAUTHORIZED, message)
     }
 
-    static AlreadyExists(status = STATUS_CONFLICT, message = "User already exists") {
-        return new CustomErrorHandler(status, message)
+    static AlreadyExists(message = "User already exists") {
+        return new CustomErrorHandler(STATUS_CONFLICT, message)
     }
 
-    static NotFound(status = STATUS_NOTFOUND, message = 'Resource not found') {
-        return new CustomErrorHandler(status, message)
+    static NotFound(message = 'Resource not found') {
+        return new CustomErrorHandler(STATUS_NOTFOUND, message)
     }
 
-    static Invalid(status = STATUS_BAD_REQUEST, message = "Invalid check your details") {
-        return new CustomErrorHandler(status, message)
+    static Invalid(message = "Invalid check your details") {
+        return new CustomErrorHandler(STATUS_BAD_REQUEST, message)
     }
 }
 
