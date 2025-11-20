@@ -4,6 +4,7 @@ import CustomErrorHandler from "../utils/CustomErrorHandler.js";
 import User from "../models/User.js";
 import bcrypt from 'bcrypt'
 import JwtService from "../utils/JwtService.js";
+import { STATUS_CREATED } from "../configs/index.js";
 
 const authController = {
     registerUser: TryCatch(async (req, res, next) => {
@@ -30,8 +31,13 @@ const authController = {
 
         // create token
         const token = JwtService.sign({ _id: user._id })
+        let data = {
+            token,
+            message: "User register success",
+            success: true
+        }
 
-
+        res.status(STATUS_CREATED).json(data)
 
     }),
 
