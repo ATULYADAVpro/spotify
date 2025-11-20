@@ -1,0 +1,24 @@
+import { DUBUG_MODE, STATUS_INTERNAL_SERVER_ERROR } from '../configs/index.js'
+import CustomErrorHandler from '../utils/CustomErrorHandler.js';
+
+function GlobalErrorHandler(err, req, res, next) {
+    let statusCode = STATUS_INTERNAL_SERVER_ERROR;
+    let data = {
+        message: "Internal server error.",
+        success: false,
+        ...(DUBUG_MODE === 'true' && { originalError: err.message })
+    }
+
+    if (err instanceof CustomErrorHandler) {
+        statusCode = err.status;
+        data = {
+            message: err.message,
+            success: false
+        }
+    }
+
+    return res.status(statusCode).json(data)
+
+}
+
+export default GlobalErrorHandler
