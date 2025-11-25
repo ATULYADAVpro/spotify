@@ -145,10 +145,10 @@ const albumController = {
         }
         const { id } = req.params;
 
-        const isAlbum = await sql`SELECT * FROM albums WHERE id = ${id}`
+        const isAlbum = await sql`SELECT * FROM songs WHERE id = ${id}`
 
         if (isAlbum.length === 0) {
-            return next(CustomErrorHandler.NotFound('No album with this is id'))
+            return next(CustomErrorHandler.NotFound('No song with this is id'))
         }
 
 
