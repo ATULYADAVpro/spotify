@@ -4,7 +4,7 @@ import { neon } from '@neondatabase/serverless'
 
 
 
-const sql = neon(POSTGRES_DB)
+export const sql = neon(POSTGRES_DB)
 
 export default async function connectDb() {
     try {

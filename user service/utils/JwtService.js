@@ -9,11 +9,9 @@ class JwtService {
 
     // Verify token
     static verify(token, secret = JWT_SECRECT) {
-        try {
+        
             return jwt.verify(token, secret)
-        } catch (error) {
-            throw new Error("Token is invaild or expired")
-        }
+        
     }
 }
 
