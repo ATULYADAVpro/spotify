@@ -118,7 +118,6 @@ const albumController = {
 
     }),
 
-
     deleteAlbum: TryCatch(async (req, res, next) => {
         if (req.user?.role !== 'admin') {
             return next(CustomErrorHandler.UnAuthorized("You are not admin"))
@@ -139,6 +138,7 @@ const albumController = {
             message: 'Album deleted successfully',
         })
     }),
+
     deleteSong: TryCatch(async (req, res, next) => {
         if (req.user?.role !== 'admin') {
             return next(CustomErrorHandler.UnAuthorized("You are not admin"))
